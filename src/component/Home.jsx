@@ -5,27 +5,11 @@ const Home = () => {
     const [cityName , setCityName ] = useState('')
     const [weatherData , setWeatherData ] = useState(null);
     // const ]\
-    const [currentCityWeather ,setCurrentCityWeather ] = useState('');
+    const [currentCityWeather ,setCurrentCityWeather ] = useState(null);
     
     const onChangeCityName =(e)=>{
         setCityName(e.target.value);
     }
-
-    const getWeatherDataByCoordinates  = async(lat , lon) =>{
-        try{
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=82479e0ec3651cdb5bd5867d071dbf71`);
-            setCurrentCityWeather(response.data);
-            console.log(response.data);
-        }catch (error){
-            console.log(error);
-        }
-    } 
-    useEffect(()=>{
-        navigator.geolocation.getCurrentPosition((position)=>{
-                const {latitude , longitude } = position.coords;
-                getWeatherDataByCoordinates ();
-        })
-    },[])
 
     const getWeatherData = async ()=>{
         try{
@@ -37,28 +21,52 @@ const Home = () => {
         }
     }
 
+    const getWeatherDataByCoordinates  = async (lat, lon) =>{
+        try{
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=82479e0ec3651cdb5bd5867d071dbf71`);
+            setCurrentCityWeather(response.data);
+            console.log(response.data);
+        }catch (error){
+            console.log(error);
+        }
+    } 
     const searchCityWeather =()=>{
         getWeatherData();
     }
+
+    
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+                const {latitude , longitude  } = position.coords;
+                getWeatherDataByCoordinates (latitude , longitude);
+        });
+    },[])
+
+    
+    
+
+    
     console.log(weatherData)
     return (
     <>
       <section>
         <section>
-        <div className="">
+        <div className="flex flex-col justify-center gap-2 m-10 p-10  items-center shadow-xl bg-blue-50 ">
                         {weatherData ? (
                             <>
-                                <h1>{weatherData.name}</h1>
-                                <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} alt="weather icon" />
-                                <p>{Math.round(weatherData.main.temp - 273.15)}°C</p>
-                                <p>{weatherData.weather[0].description}</p>
+                                <h1 className="font-bold text-xl">{weatherData.name}</h1>
+                                <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} 
+                                 className="w-18 bg-blue-100 rounded-xl p-2"  alt="weather icon" />
+                                <p className="font-bold text-xl" >{Math.round(weatherData.main.temp - 273.15)}°C</p>
+                                <p className="font-semibold">{weatherData.weather[0].description}</p>
                             </>
                         ) : currentCityWeather ? (
                             <>
-                                <h1>{currentCityWeather.name}</h1>
-                                <img src={`http://openweathermap.org/img/w/${currentCityWeather.weather[0].icon}.png`} alt="weather icon" />
-                                <p>{Math.round(currentCityWeather.main.temp - 273.15)}°C</p>
-                                <p>{currentCityWeather.weather[0].description}</p>
+                                <h1 className="font-bold text-xl">{currentCityWeather.name}</h1>
+                                <img src={`http://openweathermap.org/img/w/${currentCityWeather.weather[0].icon}.png`} 
+                                 className="w-18 bg-blue-100 rounded-xl p-2"  alt="weather icon" />
+                                <p className="font-bold text-xl" >{Math.round(currentCityWeather.main.temp - 273.15)}°C</p>
+                                <p className="font-semibold">{currentCityWeather.weather[0].description}</p>
                             </>
                         ) : (
                             <div>
