@@ -1,6 +1,8 @@
 import { Input , Button } from "@material-tailwind/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaLocationDot } from "react-icons/fa6";
+
 const Home = () => {
     const [cityName , setCityName ] = useState('')
     const [weatherData , setWeatherData ] = useState(null);
@@ -51,10 +53,10 @@ const Home = () => {
     <>
       <section>
         <section>
-        <div className="flex flex-col justify-center gap-2 m-10 p-10  items-center shadow-xl bg-blue-50 ">
+        <div className="flex flex-col justify-center  m-10 p-10  items-center shadow-xl bg-blue-gray-600  rounded-xl">
                         {weatherData ? (
                             <>
-                                <h1 className="font-bold text-xl">{weatherData.name}</h1>
+                                <h1 className="font-bold text-xl text-white">{weatherData.name}</h1>
                                 <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} 
                                  className="w-18 bg-blue-100 rounded-xl p-2"  alt="weather icon" />
                                 <p className="font-bold text-xl" >{Math.round(weatherData.main.temp - 273.15)}°C</p>
@@ -62,11 +64,12 @@ const Home = () => {
                             </>
                         ) : currentCityWeather ? (
                             <>
-                                <h1 className="font-bold text-xl">{currentCityWeather.name}</h1>
+                                <h1 className="flex gap-2 items-center mb-5 font-light text-blue-gray-50 text-xl"><FaLocationDot/> {currentCityWeather.name}</h1>
+                                <p className="mb-2 text-white font-bold text-4xl" >{Math.round(currentCityWeather.main.temp - 273.15)}°C</p>
+                                
                                 <img src={`http://openweathermap.org/img/w/${currentCityWeather.weather[0].icon}.png`} 
-                                 className="w-18 bg-blue-100 rounded-xl p-2"  alt="weather icon" />
-                                <p className="font-bold text-xl" >{Math.round(currentCityWeather.main.temp - 273.15)}°C</p>
-                                <p className="font-semibold">{currentCityWeather.weather[0].description}</p>
+                                 className="mb-3 w-18 shadow-2xl  rounded-xl p-2"  alt="weather icon" />
+                                <p className="font-semibold text-white text-xl">{currentCityWeather.weather[0].description}</p>
                             </>
                         ) : (
                             <div>
