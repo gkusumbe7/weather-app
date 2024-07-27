@@ -161,19 +161,19 @@ const Home = () => {
         </section>
         <section className="flex justify-evenly mt-0">
             {cityOneweatherData && (
-              <div className="m-2 md:w-60 md:p-12 md:gap-5
-               flex flex-col items-center gap-2  shadow-lg bg-gradient-to-t from-indigo-200 to-cyan-100 w-1/3  rounded-xl">
-                <h1 className="flex gap-1 items-center font-bold text-blue-gray-800">
-                <FaLocationDot/>{cityOneweatherData.name}
-                </h1>
-                <p className="font-semibold text-3xl">
-                  {Math.round(cityOneweatherData.main.temp - 273.15)}°C
-                </p>
-                <img
-                  src={`http://openweathermap.org/img/w/${cityOneweatherData.weather[0].icon}.png`}
-                  alt="alt"
-                />
-              </div>
+              <div className="m-2 md:w-60 md:p-12 md:gap-5 flex flex-col items-center gap-1 shadow-lg bg-gradient-to-t from-indigo-200 to-cyan-100 w-1/3 p-5 rounded-xl">
+              <h1 className="flex gap-1 items-center font-bold text-blue-gray-800">
+              <FaLocationDot/>{cityOneweatherData.name}
+              </h1>
+              <p className="font-semibold text-3xl">
+                {Math.round(cityOneweatherData.main.temp - 273.15)}°C
+              </p>
+              <img
+                src={`http://openweathermap.org/img/w/${cityOneweatherData.weather[0].icon}.png`}
+                alt="alt"
+                className="shadow-xl rounded-xl p-1"
+              />
+            </div>
             )}
 
             {cityTwoweatherData && (
@@ -187,23 +187,25 @@ const Home = () => {
                 <img
                   src={`http://openweathermap.org/img/w/${cityTwoweatherData.weather[0].icon}.png`}
                   alt="alt"
+                  className="shadow-xl rounded-xl p-1"
                 />
               </div>
             )}
 
             {cityThireeweatherData && (
-              <div className="m-2 md:w-60 md:p-14 md:gap-3 flex flex-col items-center gap-3 shadow-lg bg-gradient-to-t from-indigo-200 to-cyan-100 w-1/3 p-5 rounded-xl">
-                <h1 className="flex gap-1 items-center font-bold text-blue-gray-800">
-                <FaLocationDot/>{cityThireeweatherData.name}
-                </h1>
-                <p className="font-semibold text-3xl">
-                  {Math.round(cityThireeweatherData.main.temp - 273.15)}°C
-                </p>
-                <img
-                  src={`http://openweathermap.org/img/w/${cityThireeweatherData.weather[0].icon}.png`}
-                  alt="alt"
-                />
-              </div>
+              <div className="m-2 md:w-60 md:p-12 md:gap-5 flex flex-col items-center gap-1 shadow-lg bg-gradient-to-t from-indigo-200 to-cyan-100 w-1/3 p-5 rounded-xl">
+              <h1 className="flex gap-1 items-center font-bold text-blue-gray-800">
+              <FaLocationDot/>{cityThireeweatherData.name}
+              </h1>
+              <p className="font-semibold text-3xl">
+                {Math.round(cityThireeweatherData.main.temp - 273.15)}°C
+              </p>
+              <img
+                src={`http://openweathermap.org/img/w/${cityThireeweatherData.weather[0].icon}.png`}
+                alt="alt"
+                className="shadow-xl rounded-xl p-1"
+              />
+            </div>
             )}
           </section>
       </section>
